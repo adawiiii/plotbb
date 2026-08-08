@@ -1,3 +1,10 @@
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.patches import Polygon
+
+import numpy as np
+
 x_num = mdates.date2num(spx["Date"])
 y = spx["Close"]
 baseline = min(y) - 20
