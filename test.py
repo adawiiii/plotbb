@@ -9,15 +9,23 @@ from numpy import linspace, column_stack, vstack
 from pandas import Series
 
 class PlotBB:
-    def __init__(self, axis: Axes) -> None:
+    def __init__(
+        self,
+        axis: Axes,
+        title: str | None,
+        xlabel: str | None,
+        ylabel: str | None,
+        **kwargs
+        ) -> None:
         self.axis = axis
         return
 
-    def plot(self, x: Series, y: Series, margin: float = 0.05):
+    def plot(self, x: Series, y: Series, margin: float = 0.05, **kwargs):
         x_num = date2num(x)
         baseline = (min(y) * (1 - margin))
+        gradient = linspace(0, 1, 512).reshape(-1, 1)
 
-        # Polygon describing the area under the line
+        # Polygon of area under the line
         vertices = column_stack([x_num, y])
         vertices = vstack([
             vertices,
@@ -31,12 +39,14 @@ class PlotBB:
             facecolor="none",
             edgecolor="none",
         )
-        self.axis.add_patch(clip_polygon)
 
+        self.axis.add_patch(clip_polygon)
+        
+        # Gradient under chart
         bloomberg_cmap = LinearSegmentedColormap.from_list(
             "bloomberg_fill",
             [
-                (0.00, "#020250"),
+                (0.00, "#020250"), # try this for 0.00 & 0.05-0.07
                 (0.32, "#0058B1"),
                 (0.62, "#1086be"),
                 (0.80, "#27bef8"),
@@ -44,16 +54,6 @@ class PlotBB:
                 (1.00, "#00dbf4"),
             ],
         )
-
-        bloomberg_bgmap = LinearSegmentedColormap.from_list(
-            "bloomberg_bg",
-            [
-                "#000000",
-                "#91DCFF"
-            ],
-        )
-
-        gradient = linspace(0, 1, 512).reshape(-1, 1)
 
         image = self.axis.imshow(
             gradient,
@@ -66,6 +66,17 @@ class PlotBB:
             zorder=1,
         )
 
+        image.set_clip_path(clip_polygon)
+        
+        # Background gradient
+        bloomberg_bgmap = LinearSegmentedColormap.from_list(
+                    "bloomberg_bg",
+                    [
+                        "#000000",
+                        "#91DCFF"
+                    ],
+                )
+
         self.axis.imshow(
                     gradient,
                     extent=(x_num.min(), x_num.max(), baseline, (max(y) * (1 + margin))),
@@ -77,9 +88,8 @@ class PlotBB:
                     zorder=0,
                 )
 
-        image.set_clip_path(clip_polygon)
-
+        # Sizing 
         self.axis.set_xlim(x_num.min(), x_num.max())
         self.axis.set_ylim(baseline, (max(y) * (1 + margin)))
-        self.axis.plot(x, y, color="white", linewidth=0.5)
+        self.axis.plot(x, y, color="white", linewidth=0.5, **kwargs)
         self.axis.grid(alpha=0.3)
