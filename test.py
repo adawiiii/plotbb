@@ -1,58 +1,85 @@
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
+from matplotlib.axes import Axes
+from matplotlib.dates import date2num
 from matplotlib.colors import LinearSegmentedColormap
 from matplotlib.patches import Polygon
 
-import numpy as np
+from numpy import linspace, column_stack, vstack
 
-x_num = mdates.date2num(spx["Date"])
-y = spx["Close"]
-baseline = min(y) - 20
+from pandas import Series
 
-# Polygon describing the area under the line
-vertices = np.column_stack([x_num, y])
-vertices = np.vstack([
-    vertices,
-    [x_num[-1], baseline],
-    [x_num[0], baseline],
-])
+class PlotBB:
+    def __init__(self, axis: Axes) -> None:
+        self.axis = axis
+        return
 
-clip_polygon = Polygon(
-    vertices,
-    closed=True,
-    facecolor="none",
-    edgecolor="none",
-)
-axes[1].add_patch(clip_polygon)
+    def plot(self, x: Series, y: Series, margin: float = 0.05):
+        x_num = date2num(x)
+        baseline = (min(y) * (1 - margin))
 
-# Dark at the bottom, light cyan at the top
-bloomberg_cmap = LinearSegmentedColormap.from_list(
-    "bloomberg_fill",
-    [
-        "#061432",  # bottom
-        "#073765",
-        "#087b91",
-        "#55cddd",  # top
-    ],
-)
+        # Polygon describing the area under the line
+        vertices = column_stack([x_num, y])
+        vertices = vstack([
+            vertices,
+            [x_num[-1], baseline],
+            [x_num[0], baseline],
+        ])
 
-gradient = np.linspace(0, 1, 512).reshape(-1, 1)
+        clip_polygon = Polygon(
+            vertices,
+            closed=True,
+            facecolor="none",
+            edgecolor="none",
+        )
+        self.axis.add_patch(clip_polygon)
 
-image = axes[1].imshow(
-    gradient,
-    extent=[x_num.min(), x_num.max(), baseline, max(y)],
-    origin="lower",
-    aspect="auto",
-    cmap=bloomberg_cmap,
-    alpha=0.85,
-    interpolation="bicubic",
-    zorder=0,
-)
+        bloomberg_cmap = LinearSegmentedColormap.from_list(
+            "bloomberg_fill",
+            [
+                (0.00, "#020250"),
+                (0.32, "#0058B1"),
+                (0.62, "#1086be"),
+                (0.80, "#27bef8"),
+                (0.92, "#00dbf4"),
+                (1.00, "#00dbf4"),
+            ],
+        )
 
-# Show the gradient only beneath the price line
-image.set_clip_path(clip_polygon)
+        bloomberg_bgmap = LinearSegmentedColormap.from_list(
+            "bloomberg_bg",
+            [
+                "#000000",
+                "#91DCFF"
+            ],
+        )
 
-axes[1].set_xlim(x_num.min(), x_num.max())
-axes[1].set_ylim(baseline, max(y) + 20)
-# axes[1].xaxis_date()
-# axes[1].grid(color="#6391a3", linestyle=":", alpha=0.6)
+        gradient = linspace(0, 1, 512).reshape(-1, 1)
+
+        image = self.axis.imshow(
+            gradient,
+            extent=(x_num.min(), x_num.max(), baseline, max(y)),
+            origin="lower",
+            aspect="auto",
+            cmap=bloomberg_cmap,
+            alpha=0.35,
+            interpolation="bicubic",
+            zorder=1,
+        )
+
+        self.axis.imshow(
+                    gradient,
+                    extent=(x_num.min(), x_num.max(), baseline, (max(y) * (1 + margin))),
+                    origin="lower",
+                    aspect="auto",
+                    cmap=bloomberg_bgmap,
+                    alpha=0.197,
+                    interpolation="bicubic",
+                    zorder=0,
+                )
+
+        image.set_clip_path(clip_polygon)
+
+        self.axis.set_xlim(x_num.min(), x_num.max())
+        self.axis.set_ylim(baseline, (max(y) * (1 + margin)))
+        self.axis.plot(x, y, color="white", linewidth=0.5)
+        self.axis.grid(alpha=0.3)
