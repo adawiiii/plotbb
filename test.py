@@ -12,6 +12,16 @@ from matplotlib.lines import Line2D
 
 from numpy import linspace, column_stack, vstack, asarray
 
+# 0.6 alpha bg #85e2e8
+bloomberg_orange = LinearSegmentedColormap.from_list(
+    "bloomberg_orange",
+    [
+        (0.00, "#0a0a0a"),
+        (0.85, "#b46200"),
+        (1.00, "#b46200"),
+    ]
+)
+
 def _apply_style(fig: Figure) -> None:
     fig.set_facecolor("#000000")
 
