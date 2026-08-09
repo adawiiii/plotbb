@@ -92,4 +92,4 @@ class PlotBB:
         self.axis.set_xlim(x_num.min(), x_num.max())
         self.axis.set_ylim(baseline, (max(y) * (1 + margin)))
         self.axis.plot(x, y, color="white", linewidth=0.5, **kwargs)
-        self.axis.grid(alpha=0.3)
+        self.axis.grid(alpha=0.35)
