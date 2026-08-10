@@ -1,8 +1,56 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-/bin
-/include
-/lib
-/share
-/Scripts
+# Byte-compiled Python and cache files
+__pycache__/
+*.py[cod]
+*$py.class
 
-pyvenv.cfg
+# Packaging and build output
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+/bin/
+/Include/
+/Lib/
+/Scripts/
+/share/
+/pyvenv.cfg
+
+# Test, coverage, and type-checker caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.pyright/
+.ruff_cache/
+
+# Documentation build output
+docs/_build/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+*.swo
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*~

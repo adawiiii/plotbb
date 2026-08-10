@@ -23,10 +23,10 @@ FILL_GRADIENTS = {
     "orange": bloomberg_orangemap,
 }
 
-def _background_gradients(fill_map: LinearSegmentedColormap, bg: ChartBackgroundOption) -> LinearSegmentedColormap | None:
-    if fill_map is "blue" and bg is "blue":
+def _background_gradients(fill_map: ChartFillOption, bg: ChartBackgroundOption) -> LinearSegmentedColormap | None:
+    if fill_map is "blue" and bg is "light_blue":
         return bloomberg_bg_blue_map
-    elif fill_map is "orange" and bg is "blue":
+    elif fill_map is "orange" and bg is "light_blue":
         return bloomberg_bg_orange_map
     else:
         return None
@@ -118,29 +118,36 @@ class PlotBB:
     """Add Bloomberg-inspired plots to a Matplotlib figure and axes.
 
     Args:
-        figure: Figure to draw on. The current figure is used when omitted.
         axis: Axes to draw on. The current axes are used when omitted.
 
     Example:
         >>> fig, ax = subplots()
-        >>> chart = PlotBB(fig, ax)
+        >>> chart = PlotBB(ax)
         >>> chart.plot([1, 2, 3], [10, 15, 12])
     """
 
-    def __init__(self, figure: Figure | None = None, axis: Axes | None = None) -> None:
-        """Initialize a chart using the supplied or current figure and axes.
+    def __init__(self, axis: Axes | None = None) -> None:
+        """Initialize a chart for the supplied or current axes.
+
+        The root figure is resolved from the axes, including when the axes
+        belongs to a nested Matplotlib ``SubFigure``.
 
         Args:
-            figure: Figure to draw on. The current figure is used when omitted.
             axis: Axes to draw on. The current axes are used when omitted.
+
+        Raises:
+            ValueError: If the supplied axes is not attached to a figure.
         """
         self.axis =  axis if axis is not None else plt.gca()
+        _figure = self.axis.get_figure(root=True)
 
-        if figure is not None:
-            self.figure = figure
-        elif figure is None:
-            self.figure = plt.gcf()
+        if _figure is None:
+            raise ValueError("The supplied axes is not attached to a figure.")
 
+        self.figure: Figure = _figure
+
+        _apply_style(self.figure)
+        self.figure.set_layout_engine("tight")
         return
     
     def plot(
@@ -204,7 +211,7 @@ class PlotBB:
             fill_map = FILL_GRADIENTS[fill]
             fill_alpha = FILL_ALPHA[fill]
 
-            bg_map = _background_gradients(fill_map=fill_map, bg=bg)
+            bg_map = _background_gradients(fill_map=fill, bg=bg)
 
             # Gradient under chart
             if fill_map is not None:

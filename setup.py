@@ -7,7 +7,7 @@ with open("./README.md", "r") as f:
 
 setup(
     name="plotbb",
-    version="0.1.0",
+    version="0.2.0",
     description="Bloomberg-inspired chart styling for Matplotlib",
     python_requires=">=3.10",
     packages=find_packages(include=["plotbb", "plotbb.*"]),
