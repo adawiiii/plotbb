@@ -37,6 +37,8 @@ FILL_ALPHA = {
     "orange": 0.6,
 }
 
+
+## TODO: optional chart tick color #dfbf10
 def _apply_style(fig: Figure) -> None:
     fig.set_facecolor("#000000")
 
