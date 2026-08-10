@@ -1,12 +1,22 @@
 # PlotBB
 ![Latest Release](https://img.shields.io/github/v/release/adawiiii/plotbb) ![License](https://img.shields.io/github/license/adawiiii/plotbb) [![PyPi](https://img.shields.io/pypi/v/matplotlib)](https://pypi.org/project/matplotlib/)
 
-A Python package to be used in conjuction with Matplotlib to emulate the look of the [Bloomberg](#disclaimers) charts, because not all of us have $31,980 to spare.
+A Python package to be used in conjunction with Matplotlib to emulate the look of the [Bloomberg](#disclaimers) charts, because not all of us have $31,980 to spare.
 
 ## Examples
+```PlotBB.plot(x, y, fill="blue", bg="light_blue")```
+
 ![blue_bg_blue_example](https://github.com/adawiiii/plotbb/blob/main/figures/blue_example.png)
 
+---
+
+```PlotBB.plot(x, y, fill="orange", bg="light_blue")```
+
 ![orange_bg_blue_example](https://github.com/adawiiii/plotbb/blob/main/figures/orange_blue_bg_example.png)
+
+---
+
+```PlotBB.plot(x, y, fill="orange", bg="none")```
 
 ![orange_bg_none_example](https://github.com/adawiiii/plotbb/blob/main/figures/orange_example.png)
 
