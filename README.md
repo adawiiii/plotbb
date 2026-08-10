@@ -84,7 +84,7 @@ chart1.plot(chart_data["Date"], chart_data["Price"], fill="orange", bg="none")
 plt.show()
 ```
 
-### Saving figures[^1]
+### Saving figures
 ```py
 from plotbb import PlotBB
 import matplotlib as plt
