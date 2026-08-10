@@ -1,5 +1,7 @@
 """Package configuration for matplotlib-bloomberg."""
 
+import os
+
 from setuptools import find_packages, setup
 
 with open("./README.md", "r") as f:
@@ -7,7 +9,7 @@ with open("./README.md", "r") as f:
 
 setup(
     name="plotbb",
-    version="0.2.0",
+    version=os.environ.get("PACKAGE_VERSION", "0.2.0"),
     description="Bloomberg-inspired chart styling for Matplotlib",
     python_requires=">=3.10",
     packages=find_packages(include=["plotbb", "plotbb.*"]),
