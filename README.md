@@ -83,6 +83,21 @@ chart1.plot(chart_data["Date"], chart_data["Price"], fill="orange", bg="none")
 
 plt.show()
 ```
+
+### Saving figures[^1]
+```py
+from plotbb import PlotBB
+import matplotlib as plt
+import pandas as pd
+
+chart_data = pd.read_csv("time_series_data.csv")
+
+chart = PlotBB()
+chart.plot(chart_data["Date"], chart_data["Price"])
+
+chart.figure.savefig("chart.png")
+```
+
 ## Contributing
 Feel free to contribute by either giving more references of the Terminal charts (as I don't have access to the actual terminal and am limited to photos from Google), submitting issues on the [repository's page](https://github.com/adawiiii/plotbb/issues), or forking and creating pull requests. Any help is appreciated! 
 
