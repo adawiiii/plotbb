@@ -3,6 +3,13 @@
 
 A Python package to be used in conjuction with Matplotlib to emulate the look of the [Bloomberg](#disclaimers) charts, because not all of us have $31,980 to spare.
 
+## Examples
+![blue_bg_blue_example](https://github.com/adawiiii/plotbb/blob/main/figures/blue_example.png)
+
+![orange_bg_blue_example](https://github.com/adawiiii/plotbb/blob/main/figures/orange_blue_bg_example.png)
+
+![orange_bg_none_example](https://github.com/adawiiii/plotbb/blob/main/figures/orange_example.png)
+
 ## Usage
 > [!NOTE]
 > All functions like `subplots()` and `PlotBB.plot()` are wrappers for their Matplotlib respective underlying function and all `*args` and `**kwargs` are passed. This allows users to modify any styling or behavior. 
