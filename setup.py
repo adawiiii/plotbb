@@ -18,4 +18,5 @@ setup(
         "matplotlib>=3.11",
         "numpy>=2.0",
     ],
+    long_description=description,
 )
