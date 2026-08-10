@@ -1,6 +1,8 @@
 # PlotBB
 ![Latest Release](https://img.shields.io/github/v/release/adawiiii/plotbb) ![License](https://img.shields.io/github/license/adawiiii/plotbb) [![PyPi](https://img.shields.io/pypi/v/plotbb)](https://pypi.org/project/plotbb/)
 
+[![GitHub issues](https://img.shields.io/badge/issue_tracking-github-blue.svg)](https://github.com/adawiiii/plotbb/issues) [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?)](https://github.com/adawiiii/plotbb/fork)
+
 A Python package to be used in conjunction with Matplotlib to emulate the look of the [Bloomberg](#disclaimers) charts, because not all of us have $31,980 to spare.
 
 ## Examples
