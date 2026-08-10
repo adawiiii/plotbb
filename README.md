@@ -7,7 +7,7 @@ A Python package to be used in conjuction with Matplotlib to emulate the look of
 > [!NOTE]
 > All functions like `subplots()` and `PlotBB.plot()` are wrappers for their Matplotlib respective underlying function and all `*args` and `**kwargs` are passed. This allows users to modify any styling or behavior. 
 
-Single plot setup:
+### Single plot setup:
 ```py
 from plotbb import PlotBB
 import matplotlib as plt
@@ -21,7 +21,7 @@ chart.plot(chart_data["Date"], chart_data["Price"])
 plt.show()
 ```
 
-Multiplot setup with `subplots()`:
+### Multiplot setup with `subplots()`:
 ```py
 from plotbb import PlotBB, subplots
 import matplotlib as plt
@@ -44,7 +44,7 @@ plt.show()
 > [!WARNING]
 > Ensure `plotbb.subplots()` is used and NOT `matplotlib.pyplot.subplots()`. Also ensure the correct `Axes` is used. This allows PlotBB to style the Matplotlib correctly and draw on the correct subplot. 
 
-Different plot styles:
+### Different plot styles:
 ```py
 from plotbb import PlotBB, subplots
 import matplotlib as plt
