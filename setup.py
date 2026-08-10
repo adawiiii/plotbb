@@ -19,4 +19,5 @@ setup(
         "numpy>=2.0",
     ],
     long_description=description,
+    long_description_content_type="text/markdown"
 )
