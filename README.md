@@ -1,5 +1,5 @@
 # PlotBB
-![Latest Release](https://img.shields.io/github/v/release/adawiiii/plotbb) [![PyPi](https://img.shields.io/pypi/v/plotbb)](https://pypi.org/project/plotbb/)
+![Latest Release](https://img.shields.io/github/v/release/adawiiii/plotbb) [![PyPi]([https://img.shields.io/pypi/v/plotbb](https://img.shields.io/pypi/v/plotbb?v=2))](https://pypi.org/project/plotbb/)
 
 [![GitHub issues](https://img.shields.io/badge/issue_tracking-github-blue.svg)](https://github.com/adawiiii/plotbb/issues) [![Contributing](https://img.shields.io/badge/PR-Welcome-%23FF8300.svg?)](https://github.com/adawiiii/plotbb/fork)
 
