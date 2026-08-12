@@ -182,7 +182,14 @@ class PlotBB:
         Example:
             >>> chart.plot(x, y, fill="orange", bg="light_blue")
         """
-        lines = self.axis.plot(*args, color="white", linewidth=0.5, **kwargs)
+        default_kwargs = {
+            "color": "white",
+            "linewidth": 0.5
+        }
+
+        user_overrided_kwargs = {**default_kwargs, **kwargs}
+
+        lines = self.axis.plot(*args, **user_overrided_kwargs)
 
         for line in lines:
             x = asarray(line.get_xdata(orig=True), dtype=float)
